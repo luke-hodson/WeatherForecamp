@@ -1,0 +1,45 @@
+﻿@model WeatherForecamp.Models.ViewModels.WeatherViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@*html and c# version*@
+<table id="htmlTable" style="width:100%">
+    <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>Date</th>
+        <th>Logitude</th>
+        <th>Latitude</th>
+        <th>Weather</th>
+    </tr>
+
+    @foreach (var item in Model.Weather)
+    {
+        <tr style="border-bottom: 2px solid black">
+            <td>@item.Name</td>            
+            <td>@item.City</td>            
+            <td>@item.Date.Day/@item.Date.Month/@item.Date.Year</td>            
+            <td>@item.Longitude</td>            
+            <td>@item.Latitude</td>       
+            <td>
+                @foreach (var item2 in item.Weather)
+                {
+                    <p><b>@item2.Year</b>, Temperature - @item2.Temperature, Feels like - @item2.FeelsLikeTemp, Humidity - @item2.Humidity, Visibility - @item2.Visibility, Wind direction - @item2.WindDirection, Wind speed- @item2.WindSpeed</p>
+                }
+            </td>
+        </tr>       
+    }
+</table>
+
+@*js version*@
+<table id="jsTable"></table>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/JS/weather.js"></script>
+
+<script type="text/javascript">    
+    $(function () {       
+        var weatherObj = new weather();
+        weatherObj.buildTable();
+    });
+</script>
