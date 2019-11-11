@@ -1,9 +1,12 @@
 ﻿@model WeatherForecamp.Models.ViewModels.WeatherViewModel
+@using Newtonsoft.Json;
+
 @{
     ViewBag.Title = "Home Page";
 }
 
 @*html and c# version*@
+<h3>This table is made with C# and Html using Razor Syntax</h3>
 <table id="htmlTable" style="width:100%">
     <tr>
         <th>Name</th>
@@ -17,29 +20,35 @@
     @foreach (var item in Model.Weather)
     {
         <tr style="border-bottom: 2px solid black">
-            <td>@item.Name</td>            
-            <td>@item.City</td>            
-            <td>@item.Date.Day/@item.Date.Month/@item.Date.Year</td>            
-            <td>@item.Longitude</td>            
-            <td>@item.Latitude</td>       
+            <td>@item.Name</td>
+            <td>@item.City</td>
+            <td>@item.Date.Day/@item.Date.Month/@item.Date.Year</td>
+            <td>@item.Longitude</td>
+            <td>@item.Latitude</td>
             <td>
                 @foreach (var item2 in item.Weather)
                 {
                     <p><b>@item2.Year</b>, Temperature - @item2.Temperature, Feels like - @item2.FeelsLikeTemp, Humidity - @item2.Humidity, Visibility - @item2.Visibility, Wind direction - @item2.WindDirection, Wind speed- @item2.WindSpeed</p>
                 }
             </td>
-        </tr>       
+        </tr>
     }
 </table>
 
+<div style="margin-top: 100px;"></div>
 @*js version*@
+<h3>This table is made using Javascript, a C# object is passed into the JS</h3>
 <table id="jsTable"></table>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/JS/weather.js"></script>
 
-<script type="text/javascript">    
-    $(function () {       
-        var weatherObj = new weather();
+<script type="text/javascript">
+
+    $(function () {     
+        //here I made an instance of the JS function, then I have access to the methods inside 
+        var weatherObj = new weather('@Html.Raw(@JsonConvert.SerializeObject(Model.Weather))');
+
+        //call the buildTable method inside weather.js
         weatherObj.buildTable();
     });
 </script>

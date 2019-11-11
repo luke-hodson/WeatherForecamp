@@ -189,7 +189,7 @@ namespace WeatherForecamp.Controllers
             };
 
             model.Weather = fests;
-
+           
             return View(model);
         }
 
@@ -202,8 +202,8 @@ namespace WeatherForecamp.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.Message = "Your contact page.";            
+            
             return View();
         }
     }
