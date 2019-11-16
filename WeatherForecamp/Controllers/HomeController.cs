@@ -19,7 +19,7 @@ namespace WeatherForecamp.Controllers
                 new Festival
                 {
                     City = "Reading",
-                    Date = new DateTime(2019, 08, 24),
+                    Date = new DateTime(2019, 08, 24).ToShortDateString(),
                     Name = "Reading Festival",
                     Latitude = "51.724955",
                     Longitude = "-0.350472",
@@ -76,7 +76,7 @@ namespace WeatherForecamp.Controllers
                 new Festival
                 {
                     City = "Donington",
-                    Date = new DateTime(2019, 06, 24),
+                    Date = new DateTime(2019, 06, 24).ToShortDateString(),
                     Name = "Download Festival",
                     Latitude = "51.654786",
                     Longitude = "-0.359475",
@@ -133,7 +133,7 @@ namespace WeatherForecamp.Controllers
                 new Festival
                 {
                     City = "Glastonbury",
-                    Date = new DateTime(2019, 07, 11),
+                    Date = new DateTime(2019, 07, 11).ToShortDateString(),
                     Name = "Glastonbury Festival",
                     Latitude = "51.784512",
                     Longitude = "-0.356895",

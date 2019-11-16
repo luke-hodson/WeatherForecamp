@@ -11,7 +11,7 @@ namespace WeatherForecamp.Models
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string City { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public List<Weather> Weather { get; set; }
     }
 }

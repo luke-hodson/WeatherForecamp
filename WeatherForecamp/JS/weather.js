@@ -28,18 +28,16 @@
     //method to build the content
     this.buildContent = function () {
         var html = "";
-        var festObj = {};
-
-        var results = this.data;
-
-        //debugger; //you can use debuggers to breakpoint JS code in the browser, uncomment this line and refresh the page with Inspect element open, then hover over festObj to see the object structure
-
+        var festObj = {};       
+        
         if (this.useFilter) {
             festObj = this.filteredResults;
         }
         else {
             festObj = JSON.parse(this.data);
         }
+
+        //debugger; //you can use debuggers to breakpoint JS code in the browser, uncomment this line and refresh the page with Inspect element open, then hover over festObj to see the object structure
        
         //loop through the data
         for (var i = 0; i < festObj.length; i++) {
