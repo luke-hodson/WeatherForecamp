@@ -63,7 +63,7 @@
                 html += 'Humidity - ' + weatherItem.Humidity + ',';
                 html += 'Visibility - ' + weatherItem.Visibility + ',';
                 html += 'Wind direction - ' + weatherItem.WindDirection + ',';
-                html += 'Wind speed - ' + - weatherItem.WindSpeed;
+                html += 'Wind speed - ' + weatherItem.WindSpeed;
                 html += '</p>';
             }          
 
