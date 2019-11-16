@@ -2,12 +2,13 @@
     //this is called from inside Index.cshtml
     //this data is the serialized data passed through
     this.data = data;
+    this.filteredResults = [];
+    this.useFilter = false;
 
     //a method to build the table structure dynamically
-    this.buildTable = function () {
-
+    this.buildTable = function () {                         
         //this is dynamic html
-        var html = "";
+        var html = "<table>";
         html += "<tr>";
         html += "<th>Name</th>";
         html += "<th>City</th>";
@@ -27,12 +28,19 @@
     //method to build the content
     this.buildContent = function () {
         var html = "";
+        var festObj = {};
 
-        //get the JSON data into an JS object so we can access the data        
-        var festObj = JSON.parse(this.data);
+        var results = this.data;
+
         //debugger; //you can use debuggers to breakpoint JS code in the browser, uncomment this line and refresh the page with Inspect element open, then hover over festObj to see the object structure
 
-
+        if (this.useFilter) {
+            festObj = this.filteredResults;
+        }
+        else {
+            festObj = JSON.parse(this.data);
+        }
+       
         //loop through the data
         for (var i = 0; i < festObj.length; i++) {
             var festItem = festObj[i];
@@ -63,10 +71,39 @@
 
             //close of the table
             html += '</td>';
-            html += '</tr>';
+            html += '</tr>';            
         }
+
+        html += '</table>';
 
         //return the dynamic html
         return html;          
+    };
+
+    this.filterList = function () {
+        //grab the search term
+        var searchTerm = $('#filter-box').val();
+
+        var dataObj = JSON.parse(this.data);
+
+        //filter the results
+        if (searchTerm != "") {
+            this.filteredResults = dataObj.filter(function (el) {
+                var name = el.Name.toUpperCase();
+                return name.indexOf(searchTerm.toUpperCase()) >= 0;
+            });
+        }
+        else {
+            //if no search term, reset the list
+            this.filteredResults = dataObj.slice();
+        }               
+
+        this.useFilter = true;
+
+        //clear the table        
+        $("#jsTable table").remove(); 
+
+        //fill the table
+        this.buildTable();
     };
 }

@@ -4,6 +4,15 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<div style="margin-top: 20px;"></div>
+<input type="text" id="filter-box" class="form-control" placeholder="Search..."/>
+
+@*js version*@
+<h3>This table is made using Javascript, a C# object is passed into the JS</h3>
+
+<div id="jsTable"></div>
+
+<div style="margin-top: 200px;"></div>
 
 @*html and c# version*@
 <h3>This table is made with C# and Html using Razor Syntax</h3>
@@ -35,20 +44,24 @@
     }
 </table>
 
-<div style="margin-top: 100px;"></div>
-@*js version*@
-<h3>This table is made using Javascript, a C# object is passed into the JS</h3>
-<table id="jsTable"></table>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/JS/weather.js"></script>
 
 <script type="text/javascript">
 
-    $(function () {     
-        //here I made an instance of the JS function, then I have access to the methods inside 
+    $(function () {
+        //here I made an instance of the JS function, then I have access to the methods inside
         var weatherObj = new weather('@Html.Raw(@JsonConvert.SerializeObject(Model.Weather))');
 
         //call the buildTable method inside weather.js
         weatherObj.buildTable();
+
+
+        //events
+        $("#filter-box").keyup(function () {
+            weatherObj.filteredResults = true;
+            weatherObj.filterList();
+        });
     });
+ 
 </script>
